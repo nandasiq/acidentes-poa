@@ -1,6 +1,24 @@
+# Core
 pandas==2.2.2
 numpy==1.26.4
+pyarrow==17.0.0
+
+# Visualização
 matplotlib==3.9.0
 seaborn==0.13.2
+plotly==5.22.0
+folium==0.17.0
+
+# Estatística e Machine Learning
+scikit-learn==1.5.0
+statsmodels==0.14.2
+tensorflow==2.16.1  # ou torch==2.3.0 se preferir PyTorch
+
+# APIs e geocodificação
 requests==2.32.3
-pyarrow==17.0.0   # para suporte ao parquet
+geopy==2.4.1
+
+# Jupyter & suporte
+jupyter==1.0.0
+ipykernel==6.29.4
+openpyxl==3.1.2

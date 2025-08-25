@@ -1,0 +1,7 @@
+{
+  "name": "tcc-pipeline",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "postCreateCommand": "pip install -r ambiente.txt"
+}
