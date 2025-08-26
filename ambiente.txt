@@ -5,12 +5,12 @@ pyarrow>=16.1.0   # leitura/escrita parquet mais eficiente
 
 # Visualização
 matplotlib>=3.10.5
-seaborn>=3.8
+seaborn>=0.13
 plotly>=5.22.0
 
 # Modelagem estatística e machine learning
 scikit-learn>=1.5.1
-statsmodels>=0.15   # ARIMA, SARIMA, Holt-Winters
+statsmodels>=0.14   # ARIMA, SARIMA, Holt-Winters
 
 # API e clima
 requests>=2.32.3
