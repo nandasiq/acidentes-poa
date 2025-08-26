@@ -1,7 +1,13 @@
 {
-  "name": "tcc-pipeline",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "postCreateCommand": "pip install -r ambiente.txt"
+  "name": "TCC-POA",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "postCreateCommand": "pip install -r ambiente.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  }
 }
