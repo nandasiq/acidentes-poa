@@ -1,6 +1,6 @@
 {
   "name": "acidentes-poa",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12.11",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "postCreateCommand": "pip install -r ambiente.txt",
   "customizations": {
     "vscode": {
