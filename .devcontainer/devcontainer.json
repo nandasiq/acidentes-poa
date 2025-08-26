@@ -1,6 +1,6 @@
 {
-  "name": "TCC-POA",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "name": "acidentes-poa",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12.11",
   "postCreateCommand": "pip install -r ambiente.txt",
   "customizations": {
     "vscode": {
