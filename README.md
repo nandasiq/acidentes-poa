@@ -1,6 +1,67 @@
-# acidentes-poa
-Repositório para TCC Análise dos Acidentes de Trânsito em POA de 2020-2024
+# 🚦 Análise de Acidentes de Trânsito em Porto Alegre (2020–2024)
 
-Análise de Acidentes de Trânsito em Porto Alegre: Padrões, Fatores de Risco e Propostas de Intervenção para um Trânsito Mais Seguro
-Resumo Executivo
-Este Trabalho de Conclusão de Curso (TCC) apresenta uma análise aprofundada dos acidentes de trânsito ocorridos em Porto Alegre, com o objetivo de identificar padrões, fatores de risco e propor soluções de engenharia de tráfego para mitigar sua ocorrência e gravidade. A análise baseia-se primariamente no conjunto de dados cat_acidentes.csv 1, complementado por dados meteorológicos de precipitação obtidos através da API Open-Meteo.2 A primeira fase do estudo consistiu em uma Análise Exploratória dos Dados (AED), revelando que os tipos de acidente mais frequentes são abalroamento e colisão, concentrados predominantemente nas regiões Leste e Norte da cidade. Avenidas de grande fluxo como Assis Brasil, Protásio Alves e Bento Gonçalves emergiram como os logradouros com maior número de ocorrências. Padrões temporais indicam picos de acidentes durante os horários de início da manhã (07:00-08:30) e final da tarde (16:00-18:00), e uma distribuição significativa de acidentes durante a noite. A segunda fase investigou correlações, destacando que acidentes do tipo atropelamento, embora menos frequentes que colisões, apresentam maior média de feridos e um número significativo de fatalidades. Acidentes envolvendo motocicletas também demonstram uma alta média de feridos por ocorrência. A análise detalhada das principais avenidas revelou perfis de risco específicos, com variações nos tipos de acidente e sua ocorrência diurna/noturna. Com base nesses achados, a terceira fase propõe intervenções de engenharia de tráfego direcionadas aos pontos críticos, incluindo melhorias na sinalização, otimização de semáforos, instalação de redutores de velocidade, iluminação pública aprimorada e medidas específicas para proteção de pedestres e motociclistas. Por fim, utilizando um modelo de séries temporais (Holt-Winters), foi realizada uma previsão do número de vítimas fatais para os próximos seis meses, caso nenhuma das soluções propostas seja implementada, reforçando a urgência de ações preventivas. Este estudo sublinha a importância da análise de dados para a formulação de políticas públicas eficazes em segurança viária.
+Este repositório contém o código, dados e configuração de ambiente para o 
+Trabalho de Conclusão de Curso (MBA em Tecnologia para Negócios:
+AI, Data Science e Big Data), cujo objetivo é:
+
+- Analisar dados de acidentes de trânsito em Porto Alegre (2020–2024);
+- Investigar fatores de risco (clima, horário, regiões críticas);
+- Criar modelos preditivos para estimar acidentes futuros;
+- Propor medidas de **moderação de tráfego** baseadas em dados.
+
+---
+
+## 📂 Estrutura do projeto
+acidentes-poa/
+│
+├── .devcontainer/ # configuração de ambiente Codespaces
+│ └── devcontainer.json
+│
+├── jupyter/ # notebooks e dados
+│ ├── dados/
+│ │ └── acidentes.csv
+│ └── projeto.ipynb
+│
+├── ambiente.txt # dependências Python
+└── README.md # este arquivo
+
+---
+
+## ⚙️ Ambiente de Desenvolvimento
+
+Este projeto foi pensado para rodar diretamente no **GitHub Codespaces**
+ou em containers Docker com suporte a **devcontainers**.
+
+### 1. Abrir no Codespaces
+- Clique no botão **Code > Codespaces > Create codespace on main**.  
+- O container será criado com **Python 3.12**.  
+- Automaticamente, o comando abaixo será executado:
+
+```bash
+pip install -r ambiente.txt
+```
+
+### 2. Dependências principais
+
+O arquivo ambiente.txt lista as bibliotecas necessárias:
+  - pandas, numpy, pyarrow → manipulação de dados
+  - matplotlib, seaborn, plotly → visualização
+  - scikit-learn, statsmodels → modelagem estatística e preditiva
+  - requests, openmeteo-requests, requests-cache, retry-requests → integração com API Open-Meteo
+  - jupyter → execução dos notebooks
+
+---
+
+### 📊 Uso
+
+1. Acesse a pasta jupyter/
+2. Abra o notebook projeto.ipynb
+3. Execute a primeira célula de validação do ambiente
+
+   Ela irá confirmar se o ambiente está pronto ou sugerir a instalação de bibliotecas faltantes.
+
+### 📌 Observações
+- Os dados de acidentes são fornecidos pela EPTC/Prefeitura de Porto Alegre.
+- Dados climáticos são obtidos via Open-Meteo API
+- O foco é explorar correlações entre acidentes e fatores externos (horário, clima, localização)
+e avaliar medidas preventivas de segurança viária.
