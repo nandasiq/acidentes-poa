@@ -2,6 +2,7 @@
 # Python
 # ==========================
 **/__pycache__/
+*.pyc
 *.py[cod]
 *.so
 *.egg
@@ -50,6 +51,7 @@ Thumbs.db
 *.feather
 *.gz
 *.zip
+dados/primarios
 
 # ==========================
 # IDE / VSCode
