@@ -1,0 +1,58 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+.eggs/
+*.pyo
+*.pyd
+
+# ==========================
+# Ambientes virtuais
+# ==========================
+.venv/
+venv/
+env/
+ENV/
+.ipynb_checkpoints/
+
+# ==========================
+# Jupyter
+# ==========================
+*.ipynb_checkpoints
+.jupyter/
+.profile_default/
+ipython_config.py
+
+# ==========================
+# Logs e temporários
+# ==========================
+*.log
+*.tmp
+*.temp
+*.bak
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Dados grandes / temporários
+# (adicione aqui arquivos que não quer versionar)
+# ==========================
+*.csv
+*.tsv
+*.parquet
+*.h5
+*.db
+*.sqlite
+*.feather
+*.gz
+*.zip
+
+# ==========================
+# IDE / VSCode
+# ==========================
+.vscode/
+.history/
