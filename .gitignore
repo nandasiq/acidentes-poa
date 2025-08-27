@@ -42,7 +42,7 @@ Thumbs.db
 # Dados grandes / temporários
 # (adicione aqui arquivos que não quer versionar)
 # ==========================
-*.csv
+#*.csv
 *.tsv
 *.parquet
 *.h5
@@ -51,7 +51,7 @@ Thumbs.db
 *.feather
 *.gz
 *.zip
-dados/primarios
+#dados/primarios
 
 # ==========================
 # IDE / VSCode
