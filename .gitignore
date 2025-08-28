@@ -43,7 +43,7 @@ Thumbs.db
 # ==========================
 *.csv
 *.tsv
-*.parquet
+#*.parquet
 *.h5
 *.db
 *.sqlite
