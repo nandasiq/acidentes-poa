@@ -52,6 +52,7 @@ def salvar_parquet(df, caminho):
 def checar_nulos(df):
     return (df.isnull().mean() * 100).round(2).sort_values(ascending=False)
 
+
 # Cria um gráfico de barras para uma coluna categórica ou histograma se numérica.
 def grafico_simples(df, coluna, titulo="Distribuição"):
     plt.figure(figsize=(8,5))
@@ -61,4 +62,22 @@ def grafico_simples(df, coluna, titulo="Distribuição"):
         sns.countplot(x=df[coluna], order=df[coluna].value_counts().index)
     plt.title(titulo)
     plt.xticks(rotation=45)
+    plt.show()
+
+
+def evolucao_varios(df, cols_veic):
+    """
+    Plota a evolução anual de acidentes para uma lista de veículos.
+    
+    Parâmetros:
+    df : DataFrame com a coluna 'data' em datetime
+    cols_veic : list de str, colunas de veículos
+    """
+    df_group = df.groupby(df["data"].dt.year)[cols_veic].sum()
+    df_group.plot(kind="line", marker="o", figsize=(10,6))
+    plt.title("Evolução de acidentes por tipo de veículo (2020–2024)")
+    plt.xlabel("Ano")
+    plt.ylabel("Nº de acidentes")
+    plt.legend(title="Veículo")
+    plt.grid(True, linestyle="--", alpha=0.7)
     plt.show()
