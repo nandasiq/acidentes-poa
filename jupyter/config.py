@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
+
 ########################
 # Configurações globais
 ########################
@@ -27,6 +28,7 @@ pd.set_option("display.float_format", "{:,.2f}".format)
 # Estilo de gráficos
 plt.style.use("seaborn-v0_8")
 sns.set_theme(palette="deep", style="whitegrid")
+
 
 ######################
 # Funções utilitárias
@@ -98,17 +100,6 @@ def grafico_numerico(df, coluna, titulo="Distribuição Numérica", bins=20):
     plt.title(titulo)
     plt.show()
 
-# Cria gráfico da evolução anual para lista de veículos.
-def evolucao_veiculos(df, cols_veic, titulo="Evolução de acidentes por veículo"):
-    df_group = df.groupby(df["data"].dt.year)[cols_veic].sum()
-    df_group.plot(kind="line", marker="o", figsize=(10,6))
-    plt.title(titulo)
-    plt.xlabel("Ano")
-    plt.ylabel("Nº de acidentes")
-    plt.legend(title="Veículo")
-    plt.grid(True, linestyle="--", alpha=0.7)
-    plt.show()
-
 # Cria gráfico da proporção de vítimas/feridos/fatais em relação ao número de acidentes por veículo.
 def proporcao_veiculos(df, col_veic, col_alvo, titulo="Proporção por veículo"):
     proporcao = (df.groupby(col_veic)[col_alvo].sum() / df.groupby(col_veic)[col_alvo].count()).sort_values(ascending=False)
@@ -136,10 +127,31 @@ def plota_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8, altura=6, titulo=
     plt.show()
 
 # Salva o gráfico atual em PNG na pasta indicada.
-def salvar_grafico(nome, pasta="graficos"):
+def salvar_grafico(nome, pasta="../dados/processados/graficos"):
     os.makedirs(pasta, exist_ok=True)
     caminho = os.path.join(pasta, f"{nome}.png")
     plt.savefig(caminho, dpi=300, bbox_inches="tight")
     print(f"📊 Gráfico salvo em {caminho}")
 
+
+#################################################
+# Funções enriquecimento com dados metereologícos
+#################################################
+
+# URL base da API Open-Meteo (dados históricos de precipitação)
+url = "https://historical-forecast-api.open-meteo.com/v1/forecast"
+
+# Caminho para salvar arquivos intermediários de clima
+caminho_chuva = "../dados/intermediarios/clima/"
+
+# Coordenadas fixas
+coord = {
+    "NORTE":  (-29.987, -51.165),
+    "LESTE":  (-30.040, -51.160),
+    "CENTRO": (-30.027, -51.220),
+    "SUL":    (-30.120, -51.230)
+}
+
+# Lista de anos a iterar
+anos = [2020, 2021, 2022, 2023, 2024]
 
