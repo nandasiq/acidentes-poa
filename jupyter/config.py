@@ -48,7 +48,7 @@ def resumo_df(df, linhas=5):
 # Salva DataFrame em formato Parquet sem index.
 def salvar_parquet(df, caminho):
     df.to_parquet(caminho, index=False)
-    print(f"✅ DataFrame salvo em {caminho}")
+    print(f"Salvo: {caminho}")
 
 # Retorna percentual de valores nulos por coluna.
 def checar_nulos(df):
@@ -127,11 +127,13 @@ def plota_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8, altura=6, titulo=
     plt.show()
 
 # Salva o gráfico atual em PNG na pasta indicada.
-def salvar_grafico(nome, pasta="../dados/processados/graficos"):
+def salvar_grafico(nome):
+    pasta="../dados/processados/graficos"
     os.makedirs(pasta, exist_ok=True)
     caminho = os.path.join(pasta, f"{nome}.png")
     plt.savefig(caminho, dpi=300, bbox_inches="tight")
-    print(f"📊 Gráfico salvo em {caminho}")
+    print(f"Gráfico salvo em {caminho}")
+    plt.close()
 
 
 #################################################
@@ -139,7 +141,7 @@ def salvar_grafico(nome, pasta="../dados/processados/graficos"):
 #################################################
 
 # URL base da API Open-Meteo (dados históricos de precipitação)
-url = "https://historical-forecast-api.open-meteo.com/v1/forecast"
+url = "https://archive-api.open-meteo.com/v1/archive"
 
 # Caminho para salvar arquivos intermediários de clima
 caminho_chuva = "../dados/intermediarios/clima/"
@@ -152,6 +154,6 @@ coord = {
     "SUL":    (-30.120, -51.230)
 }
 
-# Lista de anos a iterar
+# Lista de anos estudados
 anos = [2020, 2021, 2022, 2023, 2024]
 
