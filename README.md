@@ -12,18 +12,18 @@ AI, Data Science e Big Data), cujo objetivo é:
 ---
 
 ## 📂 Estrutura do projeto
-acidentes-poa/
+acidentes-poa/  
+│  
+├── .devcontainer/ # configuração de ambiente Codespaces  
+│ └── devcontainer.json  
 │
-├── .devcontainer/ # configuração de ambiente Codespaces
-│ └── devcontainer.json
-│
-├── jupyter/ # notebooks e dados
-│ ├── dados/
-│ │ └── acidentes.csv
-│ └── projeto.ipynb
-│
-├── ambiente.txt # dependências Python
-└── README.md # este arquivo
+├── jupyter/ # notebooks e dados  
+│ ├── dados/  
+│ │ └── acidentes.csv  
+│ └── projeto.ipynb  
+│  
+├── ambiente.txt # dependências Python  
+└── README.md # este arquivo  
 
 ---
 
