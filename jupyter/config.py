@@ -52,6 +52,7 @@ def salvar_parquet(df, caminho):
 
 # Retorna percentual de valores nulos por coluna.
 def checar_nulos(df):
+    print("Percentual de valores nulos por coluna (%):")
     return (df.isnull().mean() * 100).round(2).sort_values(ascending=False)
 
 
