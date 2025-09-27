@@ -34,7 +34,7 @@ pd.set_option("display.float_format", "{:,.2f}".format)
 plt.style.use("seaborn-v0_8")
 sns.set_theme(palette="deep", style="whitegrid")
 
-def configurar_graficos():
+def config_graf():
     sns.set_style("whitegrid")
     plt.rcParams["figure.figsize"] = (12, 6)
     plt.rcParams["axes.titlesize"] = 14
@@ -91,21 +91,6 @@ def graf_temporal(df, coluna_data, coluna_valor, freq="M", titulo="Série tempor
     plt.title(titulo)
     plt.show()
 
-# Cria gráfico de barras para colunas categóricas.
-def graf_categorico(df, coluna, titulo="Distribuição de Categorias"):
-    plt.figure(figsize=(8,5))
-    sns.countplot(x=df[coluna], order=df[coluna].value_counts().index)
-    plt.title(titulo)
-    plt.xticks(rotation=45)
-    plt.show()
-
-# Cria histograma para colunas numéricas.
-def graf_numerico(df, coluna, titulo="Distribuição Numérica", bins=20):
-    plt.figure(figsize=(8,5))
-    sns.histplot(df[coluna], bins=bins, kde=False)
-    plt.title(titulo)
-    plt.show()
-
 # Calcula e plota proporção de vítimas em relação ao total de acidentes por veículo.
 def proporcao_por_veiculo(df, cols_veic, alvo, titulo="Proporção de vítimas por veículo"):
     proporcoes = {}
@@ -134,20 +119,10 @@ def evolucao_veiculos(df, cols_veic, titulo="Evolução de acidentes por veícul
 
 # Ordena dias da semana
 def ordenar_dias_semana(df, coluna):
-    dias_ordem = ["Segunda-feira", "Terça-feira", "Quarta-feira",
-                  "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"]
+    dias_ordem = ["Segunda", "Terça", "Quarta",
+                  "Quinta", "Sexta", "Sábado", "Domingo"]
     df[coluna] = pd.Categorical(df[coluna], categories=dias_ordem, ordered=True)
     return df
-
-# Cria gráfico da proporção de vítimas/feridos/fatais em relação ao número de acidentes por veículo.
-def proporcao_veiculos(df, col_veic, col_alvo, titulo="Proporção por veículo"):
-    proporcao = (df.groupby(col_veic)[col_alvo].sum() / df.groupby(col_veic)[col_alvo].count()).sort_values(ascending=False)
-    proporcao.plot(kind="bar", figsize=(10,5))
-    plt.title(titulo)
-    plt.ylabel("Proporção")
-    plt.xlabel("Veículo")
-    plt.xticks(rotation=45)
-    plt.show()
 
 # Cria mapa de calor relacionando duas variáveis com base em uma variável alvo.
 """
