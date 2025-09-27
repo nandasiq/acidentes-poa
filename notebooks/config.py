@@ -34,6 +34,12 @@ pd.set_option("display.float_format", "{:,.2f}".format)
 plt.style.use("seaborn-v0_8")
 sns.set_theme(palette="deep", style="whitegrid")
 
+def configurar_graficos():
+    sns.set_style("whitegrid")
+    plt.rcParams["figure.figsize"] = (12, 6)
+    plt.rcParams["axes.titlesize"] = 14
+    plt.rcParams["axes.labelsize"] = 12
+
 
 ######################
 # Funções utilitárias
@@ -41,8 +47,7 @@ sns.set_theme(palette="deep", style="whitegrid")
 
 # Mostra um resumo rápido de um DataFrame:
 # dimensões, tipos, nulos e primeiras linhas.
-def resumo_df(df, linhas=5):
-    
+def resumo_df(df, linhas=5):    
     print("Dimensões:", df.shape)
     print("\nTipos de dados:")
     print(df.dtypes)
@@ -64,6 +69,42 @@ def checar_nulos(df):
 ################################
 # Funções Visualização de dados
 ################################
+
+# Cria gráfico distribuição de valores de uma coluna
+def graf_contagem(df, coluna, titulo, rotacao=0, top=None):
+    ax = df[coluna].value_counts().sort_index().head(top).plot(kind="bar")
+    ax.set_title(titulo)
+    plt.xticks(rotation=rotacao)
+    plt.show()
+
+# Cria gráfico crosstab entre duas colunas
+def graf_crosstab(df, coluna1, coluna2, titulo, empilhado=True, rotacao=0):
+    pd.crosstab(df[coluna1], df[coluna2]).plot(kind="bar", stacked=empilhado)
+    plt.title(titulo)
+    plt.xticks(rotation=rotacao)
+    plt.show()
+
+# Cria gráfico série temporal agregada por período (M = mensal, Y = anual)
+def graf_temporal(df, coluna_data, coluna_valor, freq="M", titulo="Série temporal"):
+    serie = df.set_index(coluna_data).resample(freq)[coluna_valor].count()
+    serie.plot(marker="o")
+    plt.title(titulo)
+    plt.show()
+
+# Cria gráfico de barras para colunas categóricas.
+def graf_categorico(df, coluna, titulo="Distribuição de Categorias"):
+    plt.figure(figsize=(8,5))
+    sns.countplot(x=df[coluna], order=df[coluna].value_counts().index)
+    plt.title(titulo)
+    plt.xticks(rotation=45)
+    plt.show()
+
+# Cria histograma para colunas numéricas.
+def graf_numerico(df, coluna, titulo="Distribuição Numérica", bins=20):
+    plt.figure(figsize=(8,5))
+    sns.histplot(df[coluna], bins=bins, kde=False)
+    plt.title(titulo)
+    plt.show()
 
 # Calcula e plota proporção de vítimas em relação ao total de acidentes por veículo.
 def proporcao_por_veiculo(df, cols_veic, alvo, titulo="Proporção de vítimas por veículo"):
@@ -91,20 +132,12 @@ def evolucao_veiculos(df, cols_veic, titulo="Evolução de acidentes por veícul
     plt.grid(True, linestyle="--", alpha=0.7)
     plt.show()
 
-# Cria gráfico de barras para colunas categóricas.
-def grafico_categorico(df, coluna, titulo="Distribuição de Categorias"):
-    plt.figure(figsize=(8,5))
-    sns.countplot(x=df[coluna], order=df[coluna].value_counts().index)
-    plt.title(titulo)
-    plt.xticks(rotation=45)
-    plt.show()
-
-# Cria histograma para colunas numéricas.
-def grafico_numerico(df, coluna, titulo="Distribuição Numérica", bins=20):
-    plt.figure(figsize=(8,5))
-    sns.histplot(df[coluna], bins=bins, kde=False)
-    plt.title(titulo)
-    plt.show()
+# Ordena dias da semana
+def ordenar_dias_semana(df, coluna):
+    dias_ordem = ["Segunda-feira", "Terça-feira", "Quarta-feira",
+                  "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"]
+    df[coluna] = pd.Categorical(df[coluna], categories=dias_ordem, ordered=True)
+    return df
 
 # Cria gráfico da proporção de vítimas/feridos/fatais em relação ao número de acidentes por veículo.
 def proporcao_veiculos(df, col_veic, col_alvo, titulo="Proporção por veículo"):
@@ -123,7 +156,7 @@ def proporcao_veiculos(df, col_veic, col_alvo, titulo="Proporção por veículo"
     - alvo: coluna binária (ex: ACIMA_MEDIA_FREQUENCIA)
     - foco: valor de interesse (ex: 1 para 'acima da média')
 """
-def plota_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8, altura=6, titulo="Mapa de Calor"):
+def graf_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8, altura=6, titulo="Mapa de Calor"):
     mapa = pd.crosstab(index=df[eixo_y], columns=df[eixo_x], values=(df[alvo] == foco), aggfunc="sum").fillna(0)
     plt.figure(figsize=(largura, altura))
     sns.heatmap(mapa, annot=True, fmt=".0f", cmap="Blues", cbar=True)
@@ -131,15 +164,6 @@ def plota_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8, altura=6, titulo=
     plt.ylabel(eixo_y)
     plt.xlabel(eixo_x)
     plt.show()
-
-# Salva o gráfico atual em PNG na pasta indicada.
-def salvar_grafico(nome):
-    pasta=PATH_GRAFICOS
-    os.makedirs(pasta, exist_ok=True)
-    caminho = os.path.join(pasta, f"{nome}.png")
-    plt.savefig(caminho, dpi=300, bbox_inches="tight")
-    print(f"Gráfico salvo em {caminho}")
-    plt.close()
 
 
 #################################################
