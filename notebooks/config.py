@@ -30,16 +30,6 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.float_format", "{:,.2f}".format)
 
-# Estilo de gráficos
-plt.style.use("seaborn-v0_8")
-sns.set_theme(palette="deep", style="whitegrid")
-
-def config_graf():
-    sns.set_style("whitegrid")
-    plt.rcParams["figure.figsize"] = (12, 6)
-    plt.rcParams["axes.titlesize"] = 14
-    plt.rcParams["axes.labelsize"] = 12
-
 
 ######################
 # Funções utilitárias
@@ -69,6 +59,13 @@ def checar_nulos(df):
 ################################
 # Funções Visualização de dados
 ################################
+
+# Configura estilo global dos gráficos
+def config_graf():
+    sns.set_style("whitegrid")
+    plt.rcParams["figure.figsize"] = (12, 6)
+    plt.rcParams["axes.titlesize"] = 14
+    plt.rcParams["axes.labelsize"] = 12
 
 # Cria gráfico distribuição de valores de uma coluna
 def graf_contagem(df, coluna, titulo, rotacao=0, top=None):
