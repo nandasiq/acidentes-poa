@@ -68,17 +68,37 @@ def config_graf():
     plt.rcParams["axes.labelsize"] = 12
 
 # Cria gráfico distribuição de valores de uma coluna
-def graf_contagem(df, coluna, titulo, rotacao=0, top=None):
-    ax = df[coluna].value_counts().sort_index().head(top).plot(kind="bar")
+def graf_contagem(df, coluna, titulo, rotacao=0, top=None, ordenar="valor"):
+    contagem = df[coluna].value_counts()
+    if ordenar == "indice":
+        contagem = contagem.sort_index()
+    if top:
+        contagem = contagem.head(top)
+    ax = contagem.plot(kind="bar")
     ax.set_title(titulo)
     plt.xticks(rotation=rotacao)
     plt.show()
 
 # Cria gráfico crosstab entre duas colunas
-def graf_crosstab(df, coluna1, coluna2, titulo, empilhado=True, rotacao=0):
-    pd.crosstab(df[coluna1], df[coluna2]).plot(kind="bar", stacked=empilhado)
+def graf_crosstab(df, coluna1, coluna2, titulo, empilhado=True,
+                   rotacao=0, top=None, horizontal=False):
+    """
+    Plota crosstab entre duas colunas.
+    - empilhado: True para gráfico de barras empilhadas
+    - rotacao: ângulo dos rótulos no eixo X
+    - top: limitar aos N primeiros valores de coluna1
+    - horizontal: True para gráfico de barras horizontais
+    """
+    tabela = pd.crosstab(df[coluna1], df[coluna2])
+    if top:
+        tabela = tabela.sort_values(by=tabela.columns.tolist(),
+                                     ascending=False).head(top)
+    if horizontal:
+        tabela.plot(kind="barh", stacked=empilhado, figsize=(10,6))
+    else:
+        tabela.plot(kind="bar", stacked=empilhado, figsize=(12,6))
+        plt.xticks(rotation=rotacao)
     plt.title(titulo)
-    plt.xticks(rotation=rotacao)
     plt.show()
 
 # Cria gráfico série temporal agregada por período (M = mensal, Y = anual)
@@ -89,7 +109,8 @@ def graf_temporal(df, coluna_data, coluna_valor, freq="M", titulo="Série tempor
     plt.show()
 
 # Calcula e plota proporção de vítimas em relação ao total de acidentes por veículo.
-def proporcao_por_veiculo(df, cols_veic, alvo, titulo="Proporção de vítimas por veículo"):
+def proporcao_por_veiculo(df, cols_veic, alvo, 
+                          titulo="Proporção de vítimas por veículo"):
     proporcoes = {}
     for veic in cols_veic:
         total = df[veic].sum()
@@ -122,14 +143,16 @@ def ordenar_dias_semana(df, coluna):
     return df
 
 # Cria mapa de calor relacionando duas variáveis com base em uma variável alvo.
-"""
+def graf_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8,
+                 altura=6, titulo="Mapa de Calor"):
+    """
     - eixo_y: variável no eixo Y
     - eixo_x: variável no eixo X
     - alvo: coluna binária (ex: ACIMA_MEDIA_FREQUENCIA)
     - foco: valor de interesse (ex: 1 para 'acima da média')
-"""
-def graf_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8, altura=6, titulo="Mapa de Calor"):
-    mapa = pd.crosstab(index=df[eixo_y], columns=df[eixo_x], values=(df[alvo] == foco), aggfunc="sum").fillna(0)
+    """
+    mapa = pd.crosstab(index=df[eixo_y], columns=df[eixo_x], 
+                       values=(df[alvo] == foco), aggfunc="sum").fillna(0)
     plt.figure(figsize=(largura, altura))
     sns.heatmap(mapa, annot=True, fmt=".0f", cmap="Blues", cbar=True)
     plt.title(titulo)
