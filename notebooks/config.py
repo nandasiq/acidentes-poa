@@ -13,6 +13,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
+# Caminhos
+PATH_RAW = "../dados/primarios/"
+PATH_CLEAN = "../dados/intermediarios/"
+PATH_CHUVA = "../dados/intermediarios/clima/"
+PATH_GRAFICOS = "../apendices/graficos/"
 
 ########################
 # Configurações globais
@@ -129,7 +134,7 @@ def plota_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8, altura=6, titulo=
 
 # Salva o gráfico atual em PNG na pasta indicada.
 def salvar_grafico(nome):
-    pasta="../dados/processados/graficos"
+    pasta=PATH_GRAFICOS
     os.makedirs(pasta, exist_ok=True)
     caminho = os.path.join(pasta, f"{nome}.png")
     plt.savefig(caminho, dpi=300, bbox_inches="tight")
@@ -142,13 +147,10 @@ def salvar_grafico(nome):
 #################################################
 
 # URL base da API Open-Meteo (dados históricos de precipitação)
-url = "https://archive-api.open-meteo.com/v1/archive"
-
-# Caminho para salvar arquivos intermediários de clima
-caminho_chuva = "../dados/intermediarios/clima/"
+URL = "https://archive-api.open-meteo.com/v1/archive"
 
 # Coordenadas fixas
-coord = {
+COORD = {
     "NORTE":  (-29.987, -51.165),
     "LESTE":  (-30.040, -51.160),
     "CENTRO": (-30.027, -51.220),
@@ -156,5 +158,5 @@ coord = {
 }
 
 # Lista de anos estudados
-anos = [2020, 2021, 2022, 2023, 2024]
+ANOS = [2020, 2021, 2022, 2023, 2024]
 
