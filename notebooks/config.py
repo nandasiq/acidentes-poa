@@ -143,7 +143,7 @@ def salvar_grafico(nome):
 
 
 #################################################
-# Funções enriquecimento com dados metereologícos
+# Funções enriquecimento com dados metereológicos
 #################################################
 
 # URL base da API Open-Meteo (dados históricos de precipitação)
