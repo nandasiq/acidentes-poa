@@ -13,6 +13,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
+# Modelagem
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, RocCurveDisplay
+from sklearn.preprocessing import StandardScaler
+
 # Caminhos
 PATH_RAW = "../dados/primarios/"
 PATH_CLEAN = "../dados/intermediarios/"
@@ -29,7 +34,6 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 # Pandas
 pd.set_option("display.max_columns", None)
 pd.set_option("display.float_format", "{:,.2f}".format)
-
 
 ######################
 # Funções utilitárias
@@ -55,6 +59,23 @@ def checar_nulos(df):
     print("Percentual de valores nulos por coluna (%):")
     return (df.isnull().mean() * 100).round(2).sort_values(ascending=False)
 
+#################################################
+# Funções enriquecimento com dados metereológicos
+#################################################
+
+# URL base da API Open-Meteo (dados históricos de precipitação)
+URL = "https://archive-api.open-meteo.com/v1/archive"
+
+# Coordenadas fixas
+COORD = {
+    "NORTE":  (-29.987, -51.165),
+    "LESTE":  (-30.040, -51.160),
+    "CENTRO": (-30.027, -51.220),
+    "SUL":    (-30.120, -51.230)
+}
+
+# Lista de anos estudados
+ANOS = [2020, 2021, 2022, 2023, 2024]
 
 ################################
 # Funções Visualização de dados
@@ -178,33 +199,30 @@ def graf_heatmap_val(df, eixo_y, eixo_x, valor, aggfunc="sum",
     plt.xlabel(eixo_x)
     plt.show()
 
+###################
+# Funções Modelagem
+###################
 
+def split_train_test(X, y, test_size=0.2, random_state=42):
+    return train_test_split(X, y, test_size=test_size, random_state=random_state, stratify=y)
 
-#################################################
-# Funções enriquecimento com dados metereológicos
-#################################################
+def avaliar_modelo(modelo, X_test, y_test):
+    """Imprime métricas de avaliação e retorna o relatório"""
+    y_pred = modelo.predict(X_test)
+    print(classification_report(y_test, y_pred))
+    return confusion_matrix(y_test, y_pred)
 
-# URL base da API Open-Meteo (dados históricos de precipitação)
-URL = "https://archive-api.open-meteo.com/v1/archive"
-
-# Coordenadas fixas
-COORD = {
-    "NORTE":  (-29.987, -51.165),
-    "LESTE":  (-30.040, -51.160),
-    "CENTRO": (-30.027, -51.220),
-    "SUL":    (-30.120, -51.230)
-}
-
-# Lista de anos estudados
-ANOS = [2020, 2021, 2022, 2023, 2024]
-
+def plotar_matriz_confusao(cm, labels):
+    """Exibe matriz de confusão formatada"""
+    plt.figure(figsize=(6,5))
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=labels, yticklabels=labels)
+    plt.ylabel("Real")
+    plt.xlabel("Previsto")
+    plt.show()
 
 ############
 # Constantes
 ############
-# ---------------------------------------------------
-# Constantes do projeto
-# ---------------------------------------------------
 
 COLS_VEICULOS = [
     "auto",
