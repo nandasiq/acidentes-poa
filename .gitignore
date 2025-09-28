@@ -41,7 +41,7 @@ Thumbs.db
 # ==========================
 # Dados grandes / temporários
 # ==========================
-*.csv
+#*.csv
 *.tsv
 #*.parquet
 *.h5
