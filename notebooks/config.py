@@ -142,23 +142,42 @@ def ordenar_dias_semana(df, coluna):
     df[coluna] = pd.Categorical(df[coluna], categories=dias_ordem, ordered=True)
     return df
 
-# Cria mapa de calor relacionando duas variáveis com base em uma variável alvo.
-def graf_heatmap(df, eixo_y, eixo_x, alvo, foco=1, largura=8,
-                 altura=6, titulo="Mapa de Calor"):
-    """
-    - eixo_y: variável no eixo Y
-    - eixo_x: variável no eixo X
-    - alvo: coluna binária (ex: ACIMA_MEDIA_FREQUENCIA)
-    - foco: valor de interesse (ex: 1 para 'acima da média')
-    """
-    mapa = pd.crosstab(index=df[eixo_y], columns=df[eixo_x], 
-                       values=(df[alvo] == foco), aggfunc="sum").fillna(0)
+# Cria mapa de calor de contagem
+def graf_heatmap_cont(df, eixo_y, eixo_x, titulo="Mapa de Calor - Contagem",
+                          largura=10, altura=6, cmap="Blues"):
+    tabela = pd.crosstab(df[eixo_y], df[eixo_x])
     plt.figure(figsize=(largura, altura))
-    sns.heatmap(mapa, annot=True, fmt=".0f", cmap="Blues", cbar=True)
+    sns.heatmap(tabela, annot=True, fmt=".0f", cmap=cmap, cbar=True)
     plt.title(titulo)
     plt.ylabel(eixo_y)
     plt.xlabel(eixo_x)
     plt.show()
+
+# Heatmap de Valores (média/soma de severidade, etc.)
+def graf_heatmap_val(df, eixo_y, eixo_x, valor, aggfunc="sum",
+                         titulo="Mapa de Calor - Valores", largura=10, altura=6, cmap="Reds", fmt=".0f"):
+    """
+    Cria mapa de calor usando uma variável numérica agregada (ex.: soma ou média).
+    - valor: coluna numérica
+    - aggfunc: "sum", "mean", etc.
+    """
+    tabela = pd.crosstab(
+        index=df[eixo_y],
+        columns=df[eixo_x],
+        values=df[valor],
+        aggfunc=aggfunc
+    ).fillna(0)
+
+    # garante que todos os valores da matriz sejam float64
+    tabela = tabela.astype("float64")
+
+    plt.figure(figsize=(largura, altura))
+    sns.heatmap(tabela, annot=True, fmt=fmt, cmap=cmap, cbar=True)
+    plt.title(titulo)
+    plt.ylabel(eixo_y)
+    plt.xlabel(eixo_x)
+    plt.show()
+
 
 
 #################################################
@@ -179,3 +198,25 @@ COORD = {
 # Lista de anos estudados
 ANOS = [2020, 2021, 2022, 2023, 2024]
 
+
+############
+# Constantes
+############
+# ---------------------------------------------------
+# Constantes do projeto
+# ---------------------------------------------------
+
+COLS_VEICULOS = [
+    "auto",
+    "taxi",
+    "lotacao",
+    "onibus_urb",
+    "onibus_met",
+    "onibus_int",
+    "caminhao",
+    "moto",
+    "carroca",
+    "bicicleta",
+    "outro",
+    "patinete"
+]
