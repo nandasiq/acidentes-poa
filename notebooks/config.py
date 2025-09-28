@@ -75,7 +75,7 @@ COORD = {
 }
 
 # Lista de anos estudados
-ANOS = [2020, 2021, 2022, 2023, 2024]
+ANOS = [2020, 2021, 2022, 2023, 2024, 2025]
 
 ################################
 # Funções Visualização de dados
