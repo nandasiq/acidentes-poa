@@ -25,6 +25,8 @@ PATH_GRAFICOS = "../apendices/graficos/"
 
 COLS_CAT = ['regiao', 'tipo_acid', 'dia_sem', 'noite_dia']
 
+COLS_STR = ['log1', 'log2']
+
 COLS_INT = [
     'queda_arr', 'feridos', 'feridos_gr', 'fatais', 'ups',
     'auto', 'taxi', 'lotacao', 'onibus_urb', 'onibus_met',
@@ -34,9 +36,9 @@ COLS_INT = [
 
 COLS_VEICULOS = [
     'auto', 'bicicleta', 'lotacao', 'onibus_urb',
-    'onibus_met', 'onibus_int, 'caminhao',
-    'moto', 'carroca', 'taxi', 'outro', 'patinete'
-]
+    'onibus_met', 'onibus_int', 'caminhao',
+     'moto', 'carroca', 'taxi', 'outro', 'patinete'
+     ]
 
 ########################
 # Configurações globais
@@ -91,7 +93,6 @@ def ajustar_tipos(df: pd.DataFrame) -> pd.DataFrame:
             df[c] = df[c].astype('string')
 
     return df
-
 
 
 #################################################
