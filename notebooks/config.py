@@ -13,11 +13,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
-# Modelagem
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, RocCurveDisplay
-from sklearn.preprocessing import StandardScaler
-
 # Caminhos
 PATH_RAW = "../dados/primarios/"
 PATH_CLEAN = "../dados/intermediarios/"
@@ -199,9 +194,29 @@ def graf_heatmap_val(df, eixo_y, eixo_x, valor, aggfunc="sum",
     plt.xlabel(eixo_x)
     plt.show()
 
-###################
-# Funções Modelagem
-###################
+############
+# Modelagem
+############
+
+# Bibliotecas
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, RocCurveDisplay
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from imblearn.over_sampling import SMOTE
+from sklearn.linear_model import LogisticRegression
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+from  xgboost import XGBClassifier
+
+# Funções
+
+def balancear(X, y):
+    sm = SMOTE(random_state=42)
+    return sm.fit_resample(X, y)
 
 def split_train_test(X, y, test_size=0.2, random_state=42):
     return train_test_split(X, y, test_size=test_size, random_state=random_state, stratify=y)
