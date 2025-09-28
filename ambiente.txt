@@ -15,6 +15,7 @@ imbalanced-learn>=0.14.0  # tratamento de dados desbalanceados
 xgboost>=3.0.5
 joblib>=1.5.2
 scipy>=1.16.2
+shap>=0.48.0  # interpretabilidade de modelos
 
 # API e clima
 requests>=2.32.3

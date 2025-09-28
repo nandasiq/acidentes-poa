@@ -19,6 +19,25 @@ PATH_CLEAN = "../dados/intermediarios/"
 PATH_CHUVA = "../dados/intermediarios/clima/"
 PATH_GRAFICOS = "../apendices/graficos/"
 
+############
+# Constantes
+############
+
+COLS_CAT = ['regiao', 'tipo_acid', 'dia_sem', 'noite_dia']
+
+COLS_INT = [
+    'queda_arr', 'feridos', 'feridos_gr', 'fatais', 'ups',
+    'auto', 'taxi', 'lotacao', 'onibus_urb', 'onibus_met',
+    'onibus_int', 'caminhao', 'moto', 'carroca', 'bicicleta',
+    'outro', 'cont_vit', 'patinete', 'idacidente', 'predial1'
+    ] 
+
+COLS_VEICULOS = [
+    'auto', 'bicicleta', 'lotacao', 'onibus_urb',
+    'onibus_met', 'onibus_int, 'caminhao',
+    'moto', 'carroca', 'taxi', 'outro', 'patinete'
+]
+
 ########################
 # Configurações globais
 ########################
@@ -53,6 +72,27 @@ def salvar_parquet(df, caminho):
 def checar_nulos(df):
     print("Percentual de valores nulos por coluna (%):")
     return (df.isnull().mean() * 100).round(2).sort_values(ascending=False)
+
+# Padroniza tipos de colunas (categoria, inteiro, string).
+def ajustar_tipos(df: pd.DataFrame) -> pd.DataFrame:
+    """Padroniza tipos de colunas (categoria, inteiro, string)."""
+    col_cat = COLS_CAT
+    for c in col_cat:
+        if c in df.columns:
+            df[c] = df[c].astype('category')
+
+    col_int = COLS_INT
+    for c in col_int:
+        df[c] = pd.to_numeric(df[c], errors='coerce').astype('Int32')
+
+    col_str = COLS_STR
+    for c in col_str:
+        if c in df.columns:
+            df[c] = df[c].astype('string')
+
+    return df
+
+
 
 #################################################
 # Funções enriquecimento com dados metereológicos
@@ -219,21 +259,4 @@ def plotar_matriz_confusao(cm, labels):
     plt.xlabel("Previsto")
     plt.show()
 
-############
-# Constantes
-############
 
-COLS_VEICULOS = [
-    "auto",
-    "taxi",
-    "lotacao",
-    "onibus_urb",
-    "onibus_met",
-    "onibus_int",
-    "caminhao",
-    "moto",
-    "carroca",
-    "bicicleta",
-    "outro",
-    "patinete"
-]
