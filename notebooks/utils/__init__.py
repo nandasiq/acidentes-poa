@@ -5,7 +5,7 @@ Reúne funções e constantes para dados, visualização e modelagem.
 
 from .paths import *
 from .const import *
-from .data import *
-from .viz import *
+from .dados import *
+from .eda import *
 from .model import *
 from .clima import *
