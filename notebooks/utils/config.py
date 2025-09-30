@@ -1,5 +1,5 @@
 # Arquivo de configuração global
-
+""""
 # Imports principais
 import os
 import warnings
@@ -13,34 +13,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
-# Caminhos
-PATH_RAW = "../dados/primarios/"
-PATH_CLEAN = "../dados/intermediarios/"
-PATH_CHUVA = "../dados/intermediarios/clima/"
-PATH_GRAFICOS = "../apendices/graficos/"
-PATH_MODELOS = "../apendices/modelos/"
-
-
-############
-# Constantes
-############
-
-COLS_CAT = ['regiao', 'tipo_acid', 'dia_sem', 'noite_dia']
-
-COLS_STR = ['log1', 'log2']
-
-COLS_INT = [
-    'queda_arr', 'feridos', 'feridos_gr', 'fatais', 'ups',
-    'auto', 'taxi', 'lotacao', 'onibus_urb', 'onibus_met',
-    'onibus_int', 'caminhao', 'moto', 'carroca', 'bicicleta',
-    'outro', 'cont_vit', 'patinete', 'idacidente', 'predial1'
-    ] 
-
-COLS_VEICULOS = [
-    'auto', 'bicicleta', 'lotacao', 'onibus_urb',
-    'onibus_met', 'onibus_int', 'caminhao',
-     'moto', 'carroca', 'taxi', 'outro', 'patinete'
-     ]
 
 ########################
 # Configurações globais
@@ -79,7 +51,7 @@ def checar_nulos(df):
 
 # Padroniza tipos de colunas (categoria, inteiro, string).
 def ajustar_tipos(df: pd.DataFrame) -> pd.DataFrame:
-    """Padroniza tipos de colunas (categoria, inteiro, string)."""
+#    Padroniza tipos de colunas (categoria, inteiro, string).
     col_cat = COLS_CAT
     for c in col_cat:
         if c in df.columns:
@@ -141,12 +113,12 @@ def graf_contagem(df, coluna, titulo, rotacao=0, top=None, ordenar="valor"):
 # Cria gráfico crosstab entre duas colunas
 def graf_crosstab(df, coluna1, coluna2, titulo, empilhado=True,
                    rotacao=0, top=None, horizontal=False):
-    """
-    Plota crosstab entre duas colunas.
-    - empilhado: True para gráfico de barras empilhadas
-    - rotacao: ângulo dos rótulos no eixo X
-    - top: limitar aos N primeiros valores de coluna1
-    - horizontal: True para gráfico de barras horizontais
+#    """
+#    Plota crosstab entre duas colunas.
+#    - empilhado: True para gráfico de barras empilhadas
+#    - rotacao: ângulo dos rótulos no eixo X
+#    - top: limitar aos N primeiros valores de coluna1
+#    - horizontal: True para gráfico de barras horizontais
     """
     tabela = pd.crosstab(df[coluna1], df[coluna2])
     if top:
@@ -215,10 +187,10 @@ def graf_heatmap_cont(df, eixo_y, eixo_x, titulo="Mapa de Calor - Contagem",
 # Heatmap de Valores (média/soma de severidade, etc.)
 def graf_heatmap_val(df, eixo_y, eixo_x, valor, aggfunc="sum",
                          titulo="Mapa de Calor - Valores", largura=10, altura=6, cmap="Reds", fmt=".0f"):
-    """
-    Cria mapa de calor usando uma variável numérica agregada (ex.: soma ou média).
-    - valor: coluna numérica
-    - aggfunc: "sum", "mean", etc.
+#    """
+#    Cria mapa de calor usando uma variável numérica agregada (ex.: soma ou média).
+#    - valor: coluna numérica
+#    - aggfunc: "sum", "mean", etc.
     """
     tabela = pd.crosstab(
         index=df[eixo_y],
@@ -249,17 +221,17 @@ def split_train_test(X, y, test_size=0.2, random_state=42):
     return train_test_split(X, y, test_size=test_size, random_state=random_state, stratify=y)
 
 def avaliar_modelo(modelo, X_test, y_test):
-    """Imprime métricas de avaliação e retorna o relatório"""
+#    Imprime métricas de avaliação e retorna o relatório
     y_pred = modelo.predict(X_test)
     print(classification_report(y_test, y_pred))
     return confusion_matrix(y_test, y_pred)
 
 def plotar_matriz_confusao(cm, labels):
-    """Exibe matriz de confusão formatada"""
+#    Exibe matriz de confusão formatada
     plt.figure(figsize=(6,5))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=labels, yticklabels=labels)
     plt.ylabel("Real")
     plt.xlabel("Previsto")
     plt.show()
 
-
+"""
