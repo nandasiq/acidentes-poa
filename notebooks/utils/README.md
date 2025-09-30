@@ -12,10 +12,10 @@ A estrutura segue boas práticas de ciência de dados e modularização de códi
 ## Estrutura
 
 utils/  
-├── init.py # Agregador dos módulos  
-├── paths.py # Caminhos de dados e outputs  
-├── constants.py # Constantes de colunas, coordenadas, anos  
-├── data_utils.py # Funções utilitárias de DataFrames  
-├── viz_utils.py # Funções de visualização padronizadas  
-├── model_utils.py # Funções auxiliares de modelagem  
-└── clima_utils.py # Funções para dados meteorológicos (Open-Meteo)  
+├── init.py          # Agregador dos módulos  
+├── paths.py         # Caminhos de dados e outputs  
+├── constants.py     # Constantes de colunas, coordenadas, anos  
+├── data_utils.py    # Funções utilitárias de DataFrames  
+├── viz_utils.py     # Funções de visualização padronizadas  
+├── model_utils.py   # Funções auxiliares de modelagem  
+└── clima_utils.py   # Funções para dados meteorológicos (Open-Meteo)  
