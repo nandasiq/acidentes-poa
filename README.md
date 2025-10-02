@@ -1,7 +1,7 @@
 # Análise e Modelagem de Acidentes de Trânsito em Porto Alegre (2020–2025)
 
 Este projeto é parte do Trabalho de Conclusão de Curso (TCC) do MBA em **Tecnologia para Negócios: IA, Data Science e Big Data**.  
-O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina** para analisar os acidentes de trânsito em Porto Alegre, correlacionando com fatores climáticos (chuva) e propondo modelos preditivos para apoiar políticas públicas como o **PNATRANS** (Plano Nacional de Redução de Mortes e Lesões no Trânsito).
+O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina** para analisar os acidentes de trânsito em Porto Alegre, correlacionando com fatores climáticos (chuva) e propondo modelos preditivos para apoiar políticas públicas como o **PNATRANS** (Plano Nacional de Redução de Mortes e Lesões no Trânsito).  
 
 ---
 
@@ -18,20 +18,20 @@ O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina
 ## 🗂️ Estrutura do Projeto
 
 - `notebooks/`  
-  - `01_limpeza.ipynb` → Pré-processamento e padronização dos dados de acidentes.  
-  - `02_chuva.ipynb` → Coleta e integração de dados climáticos (chuva).  
-  - `03_eda.ipynb` → Análises descritivas e exploratórias.  
-  - `04_modelagem.ipynb` → Modelos de aprendizado de máquina e séries temporais.  
-  - `05_agente.ipynb` (em desenvolvimento) → Prototipagem de agente inteligente com recomendações para o PNATRANS.  
-  - `config.py` → Funções utilitárias compartilhadas (gráficos, limpeza, integração de dados).  
+  - `01_limpeza.ipynb` → Preparação inicial da base: padronização, tratamento de tipos e limpeza conforme dicionário de variáveis.    
+  - `02_chuva.ipynb` → Integração dos dados meteorológicos via **API Open-Meteo**, enriquecendo a base com indicadores climáticos.
+  - `03_eda.ipynb` → **Análise Exploratória de Dados (EDA)** para identificar padrões temporais, regionais e contextuais.   
+  - `04_modelagem.ipynb` → Construção e comparação de modelos preditivos (**estatísticos e de ML**).  
+  - `05_agente.ipynb` → Protótipo de **Agente Inteligente** que correlaciona pontos críticos e propõe soluções alinhadas ao PNATRANS.  
+  - `utils/` → Funções utilitárias (constantes, caminhos, integração de dados), promovendo **reuso de código e boas práticas**.  
 
 - `dados/`  
-  - `brutos/` → Dados originais (acidentes e clima).  
+  - `primarios/` → Dados originais (acidentes e clima).  
   - `intermediarios/` → Dados tratados e integrados.  
-  - `processados/` → Resultados finais prontos para análise/modelagem.  
 
-- `figures/` → Gráficos gerados nos notebooks.  
-- `reports/` → Relatórios parciais e apêndices.  
+- `apendices/`
+   - `graficos/` → Gráficos gerados nos notebooks.  
+   - `modelo/` → Armazena melhor modelo.  
 
 ---
 
@@ -64,6 +64,15 @@ A metodologia segue as boas práticas de **Ciência de Dados**:
 
 ---
 
+## 🛠️ Tecnologias Utilizadas
+
+- **Linguagem:** Python (pandas, seaborn, matplotlib, scikit-learn, statsmodels)  
+- **Infraestrutura:** GitHub Codespaces / Jupyter Notebooks  
+- **APIs e Dados Externos:** Open-Meteo API  
+- **Metodologias de Ciência de Dados:** CRISP-DM, TDSP  
+
+---
+
 ## ⚙️ Como Executar
 
 1. Clone este repositório:  
@@ -72,18 +81,25 @@ A metodologia segue as boas práticas de **Ciência de Dados**:
    cd acidentes-poa
 2. Clone este repositório:  
    ```bash
-  python3 -m venv .venv
-  source .venv/bin/activate   # Linux/Mac
-  .venv\Scripts\activate      # Windows
-  pip install -r ambiente.txt
+   python3 -m venv .venv
+   source .venv/bin/activate   # Linux/Mac
+   .venv\Scripts\activate      # Windows
+   pip install -r ambiente.txt
 3. Execute os Notebooks 01-05  
 
 -----------------------
 ## Principais Referências:
 
-* Breiman, L. (2001). Statistical Modeling: The Two Cultures.
-* Bishop, C. (2006). Pattern Recognition and Machine Learning. Springer.
-* Hastie, T.; Tibshirani, R.; Friedman, J. (2009). The Elements of Statistical Learning. Springer.
-* Murphy, K. P. (2012). Machine Learning: A Probabilistic Perspective. MIT Press.
-* Géron, A. (2022). Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow. O’Reilly.
-* Zabala, F. J. (2019). Modelagem Preditiva. PUCRS
+* Breiman, L. Statistical Modeling: The Two Cultures. (2001).
+* Bishop, C. Pattern Recognition and Machine Learning. Springer. (2006).
+* Géron, A. Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow. O’Reilly. (2022).
+* Han, J. et al. *Data Mining: Concepts and Techniques* (2011).
+* Hastie, T.; Tibshirani, R.; Friedman, J. The Elements of Statistical Learning. Springer. (2009).
+* Hyndman, R.J.; Athanasopoulos, G. *Forecasting: Principles and Practice* (2021).
+* Murphy, K. P. Machine Learning: A Probabilistic Perspective. MIT Press. (2012).
+* Provost, F.; Fawcett, T. *Data Science para Negócios* (2016).
+* Scopel, R.; Rodrigues, R. D. *DS e AI para Eficiência nas Finanças* (2023).
+* Shearer, C. *The CRISP-DM Model* (2000); Wirth, R.; Hipp, J. (2000).    
+* Ward, M.; Keim, D.; Grinstein, G. *Interactive Data Visualization* (2015).  
+* Ware, C. *Information Visualization: Perception for Design* (2013).  
+* Zabala, F. J. Modelagem Preditiva. PUCRS (2019).

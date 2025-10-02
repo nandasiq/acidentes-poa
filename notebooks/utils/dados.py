@@ -14,6 +14,8 @@ pd.set_option("display.float_format", "{:,.2f}".format)
 def resumo_df(df, linhas=5):
     """Mostra resumo rápido de dimensões, tipos, nulos e primeiras linhas."""
     print("Dimensões:", df.shape)
+    print("\nInfo: ")
+    df.info()
     print("\nTipos de dados:")
     print(df.dtypes)
     print("\nNulos por coluna:")
