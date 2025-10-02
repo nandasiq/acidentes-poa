@@ -5,7 +5,7 @@ O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 1. **Limpeza e integração dos dados de acidentes (2020–2024)**, fornecidos pela EPTC/POA.  
 2. **Enriquecimento dos dados** com variáveis externas, como chuva, obtidas via API **Open-Meteo**.  
@@ -15,7 +15,7 @@ O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina
 
 ---
 
-## 🗂️ Estrutura do Projeto
+## Estrutura do Projeto
 
 - `notebooks/`  
   - `01_limpeza.ipynb` → Preparação inicial da base: padronização, tratamento de tipos e limpeza conforme dicionário de variáveis.    
@@ -35,7 +35,7 @@ O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina
 
 ---
 
-## 📊 Metodologia
+## Metodologia
 
 A metodologia segue as boas práticas de **Ciência de Dados**:
 
@@ -64,7 +64,7 @@ A metodologia segue as boas práticas de **Ciência de Dados**:
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Linguagem:** Python (pandas, seaborn, matplotlib, scikit-learn, statsmodels)  
 - **Infraestrutura:** GitHub Codespaces / Jupyter Notebooks  
@@ -73,7 +73,7 @@ A metodologia segue as boas práticas de **Ciência de Dados**:
 
 ---
 
-## ⚙️ Como Executar
+## Como Executar
 
 1. Clone este repositório:  
    ```bash
