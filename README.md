@@ -11,7 +11,7 @@ O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina
 2. **Enriquecimento dos dados** com variáveis externas, como chuva, obtidas via API **Open-Meteo**.  
 3. **Análise Exploratória (EDA)** para identificar padrões temporais, geográficos e sazonais nos acidentes.  
 4. **Modelagem Preditiva** utilizando técnicas de **Machine Learning** e **Séries Temporais**, com validação nos dados de **2025**.  
-5. **Agente Inteligente** (caderno 05) para correlacionar pontos críticos e sugerir ações alinhadas ao PNATRANS.  
+5. **Agente Inteligente** para correlacionar pontos críticos e sugerir ações alinhadas ao PNATRANS.  
 
 ---
 
@@ -40,8 +40,8 @@ O objetivo é aplicar técnicas de **Ciência de Dados e Aprendizado de Máquina
 A metodologia segue as boas práticas de **Ciência de Dados**:
 
 1. **Coleta e Limpeza de Dados**  
-   - Padronização de colunas e tipagem (int, category, datetime).  
-   - Criação de variáveis derivadas (UPS – Unidade Padrão de Severidade).  
+   - Compreensão e resumo dos dados.  
+   - Padronização de colunas e tipagem (int, category, datetime).   
 
 2. **Integração de Dados Externos**  
    - API Open-Meteo para chuva acumulada por região de Porto Alegre.  
